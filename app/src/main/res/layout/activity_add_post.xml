@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="#000000">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_round_keyboard_arrow_left_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logoProva"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    //FORM
+    <LinearLayout
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="150dp"
+        android:orientation="vertical">
+
+        //LUOGO
+        <com.google.android.material.textfield.TextInputLayout
+            android:paddingBottom="20dp"
+            android:id="@+id/luogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="LUOGO"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/id_luogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        //DESCRIZIONE
+        <com.google.android.material.textfield.TextInputLayout
+            android:paddingBottom="20dp"
+            android:id="@+id/descrizione"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DESCRIZIONE"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/id_descrizione"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Contenuto principale -->
+        ​<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+        android:paddingBottom="20dp">
+
+            <TextView
+                android:paddingLeft="15dp"
+                android:layout_weight="0.9"
+                android:layout_gravity="center_vertical"
+                android:text="IMMAGINE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_weight="0.1"
+                android:onClick="apriGalleria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:rotation="45"
+                android:src="@drawable/ic_baseline_attach_file_24"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/imgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id = "@+id/buttonPost"
+            android:onClick="verificaInput"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "16dp"
+            android:layout_gravity = "center"
+            android:text ="  PUBBLICA"
+            android:enabled="true"
+            android:textAlignment="center"/>
+        ​
+
+    </LinearLayout>
+</ScrollView>
+</RelativeLayout>

@@ -7,20 +7,84 @@
     tools:context=".MainActivity">
 
 
+    //PARTE SUPERIORE
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="#000000">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_outline_info_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logoProva"/>
+
+
+    </LinearLayout>
+
+
+    // CONTAINER
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="100dp"
+        android:layout_centerInParent="true">
+
+        <FrameLayout
+            android:id="@+id/id_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#DDC000"/>
+
+    </LinearLayout>
+
     //LINEAR LAYOUT BOTTOM NAVIGATION
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/id_tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_navigation_menu" />
+            android:layout_alignParentBottom="true"
+            app:tabIndicatorColor="#FFFFFF"
+            app:tabSelectedTextColor="#FFFFFF"
+            app:tabTextColor="#535353"
+            android:background="#000000">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/id_bacheca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bacheca"
+                />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/id_mappa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mappa"
+                />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/id_misura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/misura"
+                />
+
+        </com.google.android.material.tabs.TabLayout>
     </LinearLayout>
+
+
 
 </RelativeLayout>

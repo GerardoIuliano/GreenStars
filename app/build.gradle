@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 28
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.example.greenstars"
-        minSdkVersion 29
-        targetSdkVersion 30
+        minSdkVersion 20
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
