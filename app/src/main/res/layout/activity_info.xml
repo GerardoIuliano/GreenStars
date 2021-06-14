@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="#000000">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:onClick="back"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_round_keyboard_arrow_left_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="center"
+            android:textSize="20dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Informazioni"/>
+        <TextView
+            android:background="#000000"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GreenStars è un progetto di Citizen Science per la raccolta di dati sull'inquinamento luminoso.\nGreenStars permette la raccolta di informazioni sul livello di inquinamento presente nel mondo e inoltre mette a disposizione la possibilità di condividere post significativi per sensibilizzare le persone verso questa tematica."/>
+
+    </LinearLayout>
+
+</RelativeLayout>

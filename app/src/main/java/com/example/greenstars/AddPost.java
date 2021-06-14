@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -19,6 +20,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -27,8 +31,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,33 +54,103 @@ public class AddPost extends Activity {
     private static final int MIN_DIST = 20;
     private static final int MIN_PERIOD = 30000;
     private String luogo,descrizione;
-    private TextView tv_luogo,tv_descrizione;
-    private Bitmap immagine;
+    private TextInputLayout tv_luogo,tv_descrizione;
+    private TextInputEditText it_luogo,it_descrizione;
+    private Bitmap immagine=null;
     private Button buttonConferma;
+    private TextView error_img;
+    private float dpi;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences obj;
+    private ImageView img_button_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_add_post);
+        obj = getApplicationContext().getSharedPreferences("file",MODE_PRIVATE);
+        editor = obj.edit();
+        dpi = getApplicationContext().getResources().getDisplayMetrics().density;
+        error_img=findViewById(R.id.error_img);
         buttonConferma=findViewById(R.id.buttonPost);
-        tv_luogo=findViewById(R.id.id_luogo);
-        tv_descrizione=findViewById(R.id.id_descrizione);
-        luogo=tv_luogo.getText().toString();
-        descrizione=tv_descrizione.getText().toString();
+        img_button_back=findViewById(R.id.button_back_post);
+        img_button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("DEBUG","tasto indietro");
+                onBackPressed();
+            }
+        });
+        buttonConferma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(immagine==null){
+                    error_img.setVisibility(View.VISIBLE);
+                    return;
+                }
+                pubblica();
+            }
+        });
+        tv_luogo=findViewById(R.id.luogo);
+        tv_descrizione=findViewById(R.id.descrizione);
+        it_luogo=findViewById(R.id.id_luogo);
+        luogo=it_luogo.getText().toString();
+        it_luogo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                luogo=it_luogo.getText().toString();
+                Log.d("LIST_L","AFTER");
+                if(luogo == null || luogo.equals("") || (luogo.trim()).equals("")){
+                    Log.d("LIST_L_IN",luogo);
+                    tv_luogo.setError("Campo non valido");
+                    tv_luogo.setErrorEnabled(true);
+                }else{
+                    Log.d("LIST_L_OUT","FUORI");
+                    tv_luogo.setError("");
+                    tv_luogo.setErrorEnabled(false);
+                    compilato();
+                }
+            }
+        });
+        it_descrizione=findViewById(R.id.id_descrizione);
+        descrizione=it_descrizione.getText().toString();
+        it_descrizione.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                descrizione=it_descrizione.getText().toString();
+                Log.d("LIST_D","AFTER");
+                if(descrizione == null || descrizione.equals("") || (descrizione.trim()).equals("")){
+                    Log.d("LIST_D_IN",descrizione);
+                    tv_descrizione.setError("Campo non valido");
+                    tv_descrizione.setErrorEnabled(true);
+                }else{
+                    Log.d("LIST_D_OUT","FUORI");
+                    tv_descrizione.setError("");
+                    tv_descrizione.setErrorEnabled(false);
+                    compilato();
+                }
+            }
+        });
     }
-
     public void apriGalleria(View view) {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             InputStream inputStream = null;
-
             if (ContentResolver.SCHEME_CONTENT.equals(selectedImage.getScheme())) {
                 try {
                     inputStream = this.getContentResolver().openInputStream(selectedImage);
@@ -87,10 +166,11 @@ public class AddPost extends Activity {
                     }
                 }
             }
-
             immagine = BitmapFactory.decodeStream(inputStream);
             ImageView imageView = findViewById(R.id.imgView);
+            immagine=Bitmap.createScaledBitmap(immagine, (int) ((immagine.getWidth()/dpi)*0.9), (int) ((immagine.getHeight()/dpi)*0.9), true);
             imageView.setImageBitmap(immagine);
+            compilato();
         }
     }
 
@@ -98,25 +178,21 @@ public class AddPost extends Activity {
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
         }
-
         @Override
         public void onProviderEnabled(String provider) {
             // attivo GPS su dispositivo
            // updateText(R.id.enabled, "TRUE");
         }
-
         @Override
         public void onProviderDisabled(String provider) {
             // disattivo GPS su dispositivo
             //updateText(R.id.enabled, "FALSE");
         }
-
         @Override
         public void onLocationChanged(Location location) {
             //updateGUI(location);
         }
     };
-
     private void updateGUI(Location location) {
         Date timestamp = new Date(location.getTime());
         //updateText(R.id.timestamp, timestamp.toString());
@@ -126,13 +202,10 @@ public class AddPost extends Activity {
         //updateText(R.id.longitude, String.valueOf(longitude));
         new AddressSolver().execute(location);
     }
-
     private void updateText(int id, String text) {
         TextView textView = (TextView) findViewById(id);
         textView.setText(text);
     }
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -142,7 +215,6 @@ public class AddPost extends Activity {
             return;
         }
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
         if (location!=null)
             updateGUI(location);
         /*
@@ -152,7 +224,6 @@ public class AddPost extends Activity {
             updateText(R.id.enabled, "FALSE");
         */
         locationManager.requestLocationUpdates(providerId, MIN_PERIOD,MIN_DIST, locationListener);
-
     }
     @Override
     protected void onPause()
@@ -161,7 +232,6 @@ public class AddPost extends Activity {
         if (locationManager!=null && locationManager.isProviderEnabled(providerId))
             locationManager.removeUpdates(locationListener);
     }
-
     private class AddressSolver extends AsyncTask<Location, Void, String>
     {
         @Override
@@ -175,9 +245,7 @@ public class AddPost extends Activity {
             {
                 addresses = geo.getFromLocation(latitude, longitude, 1);
             }
-            catch (IOException e)
-            {
-            }
+            catch (IOException e) { }
             if (addresses!=null)
             {
                 if (addresses.isEmpty())
@@ -213,18 +281,27 @@ public class AddPost extends Activity {
                 updateText(R.id.id_luogo, "N.A.");
         }
     }
-
-    public boolean isFilled(){
-        if(luogo!=null && descrizione!=null && immagine!=null) {
+    public void compilato(){
+        if( !(descrizione == null || descrizione.equals("")) && !(luogo == null || luogo.equals("")) && immagine!=null){
             buttonConferma.setEnabled(true);
-            return true;
-        }else
-            return false;
-    }
-
-    public void verificaInput(){
-        if(luogo == null){
-
+        }else{
+            buttonConferma.setEnabled(false);
         }
+    }
+    public void pubblica(){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        immagine.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream);
+        String imgString = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+        editor.putString("IMMAGINE",imgString);
+        luogo=it_luogo.getText().toString();
+        editor.putString("LUOGO",luogo.toUpperCase());
+        descrizione=it_descrizione.getText().toString();
+        editor.putString("DESCRIZIONE",descrizione);
+        editor.putBoolean("POST",true);
+        editor.commit();
+        onBackPressed();
+    }
+    public void back_to_bacheca(View view){
+        onBackPressed();
     }
 }

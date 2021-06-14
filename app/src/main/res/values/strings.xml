@@ -4,4 +4,7 @@
     <string name="mappa">MAPPA</string>
     <string name="misura">MISURA</string>
     <string name="title">GREEN STARS</string>
+    <string name="descLondra">L\'inquinamento luminoso è fondamentalmente un\'alterazione spesso nociva, dei naturali e normalmente bassi livelli di luce, che sarebbero presenti nell\'ambiente notturno, in assenza di luminarie artificiali.</string>
+    <string name="descLA">L\'inquinamento luminoso è l\'effetto lesivo e deleterio causato dalle luminarie artificiali urbane e suburbane, utilizzate dall\'uomo nelle zone abitate e nelle vie di collegamento tra queste, originato soprattutto da una cattiva progettazione di illuminotecnica e da un abuso energetico sconsiderato.</string>
+    <string name="descIta"> L\'inquinamento luminoso prodotto dall\'illuminazione delle città causa per sette italiani su dieci un vero e proprio "plenilunio artificiale": infatti il cielo notturno nel luogo ove essi vivono è più luminoso di quanto si misura nelle notti prossime al plenilunio in siti astronomici non inquinati.</string>
 </resources>

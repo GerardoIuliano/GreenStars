@@ -24,6 +24,51 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    //CARD 0
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <!-- Media -->
+                            <ImageView
+                                android:id="@+id/img0"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="centerCrop"
+                                />
+
+                            <LinearLayout
+                                android:id="@+id/linear0"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:orientation="vertical"
+                                android:background="#191919">
+
+                                <!-- Title -->
+                                <TextView
+                                    android:textAppearance="?attr/textAppearanceHeadline6"
+                                    android:id="@+id/luogo0"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <!-- Description -->
+                                <TextView
+                                    android:id="@+id/descrizione0"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?attr/textAppearanceBody2"
+                                    android:textColor="?android:attr/textColorSecondary"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                     //CARD 1
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card"
@@ -38,6 +83,7 @@
 
                             <!-- Media -->
                             <ImageView
+                                android:id="@+id/img1"
                                 android:layout_width="match_parent"
                                 android:layout_height="194dp"
                                 android:src="@drawable/londra"
@@ -53,17 +99,19 @@
 
                                 <!-- Title -->
                                 <TextView
+                                    android:id="@+id/luogo1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/title"
+                                    android:text="LONDRA"
                                     android:textAppearance="?attr/textAppearanceHeadline6"
                                     />
                                 <!-- Description -->
                                 <TextView
+                                    android:id="@+id/descrizione1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="16dp"
-                                    android:text="description description description description"
+                                    android:text="@string/descLondra"
                                     android:textAppearance="?attr/textAppearanceBody2"
                                     android:textColor="?android:attr/textColorSecondary"
                                     />
@@ -87,7 +135,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="194dp"
-                                android:src="@drawable/londra"
+                                android:src="@drawable/citta"
                                 android:scaleType="centerCrop"
                                 />
 
@@ -102,7 +150,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/title"
+                                    android:text="LOS ANGELES"
                                     android:textAppearance="?attr/textAppearanceHeadline6"
                                     />
                                 <!-- Description -->
@@ -110,7 +158,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="16dp"
-                                    android:text="description description description description"
+                                    android:text="@string/descLA"
                                     android:textAppearance="?attr/textAppearanceBody2"
                                     android:textColor="?android:attr/textColorSecondary"
                                     />
@@ -131,12 +179,12 @@
                             android:orientation="vertical">
 
                             <!-- Media -->
+
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="194dp"
-                                android:src="@drawable/londra"
                                 android:scaleType="centerCrop"
-                                />
+                                android:src="@drawable/citta1" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -149,7 +197,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/title"
+                                    android:text="ITALIA"
                                     android:textAppearance="?attr/textAppearanceHeadline6"
                                     />
                                 <!-- Description -->
@@ -157,7 +205,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="16dp"
-                                    android:text="description description description description"
+                                    android:text="@string/descIta"
                                     android:textAppearance="?attr/textAppearanceBody2"
                                     android:textColor="?android:attr/textColorSecondary"
                                     />
