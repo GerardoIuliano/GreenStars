@@ -45,6 +45,7 @@ public class AddPost extends Activity {
     private static final int MIN_DIST = 20;
     private static final int MIN_PERIOD = 30000;
     private String luogo,descrizione;
+    private TextView tv_luogo,tv_descrizione;
     private Bitmap immagine;
     private Button buttonConferma;
     @Override
@@ -53,6 +54,10 @@ public class AddPost extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_add_post);
         buttonConferma=findViewById(R.id.buttonPost);
+        tv_luogo=findViewById(R.id.id_luogo);
+        tv_descrizione=findViewById(R.id.id_descrizione);
+        luogo=tv_luogo.getText().toString();
+        descrizione=tv_descrizione.getText().toString();
     }
 
     public void apriGalleria(View view) {
@@ -218,6 +223,8 @@ public class AddPost extends Activity {
     }
 
     public void verificaInput(){
+        if(luogo == null){
 
+        }
     }
 }
