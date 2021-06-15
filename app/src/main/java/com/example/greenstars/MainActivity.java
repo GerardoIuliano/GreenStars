@@ -1,8 +1,5 @@
 package com.example.greenstars;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -18,11 +15,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
-    FragmentManager fm = getFragmentManager();
+    FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction ft = fm.beginTransaction();
     public FrameLayout fr;
     public Fragment bacheca, mappa, misura;
