@@ -6,6 +6,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:background="#000000">
@@ -37,7 +41,7 @@
         android:paddingRight="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="150dp"
+        android:paddingTop="50dp"
         android:orientation="vertical">
 
         <TextView
@@ -147,4 +151,5 @@
 
     </LinearLayout>
 </ScrollView>
+    </LinearLayout>
 </RelativeLayout>
