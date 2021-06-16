@@ -41,7 +41,7 @@
 
         <activity android:name=".AddPost"/>
         <activity android:name=".Info"/>
-
+        <activity android:name=".AddMisura"/>
     </application>
 
 </manifest>

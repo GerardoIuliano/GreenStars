@@ -4,29 +4,30 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-
 import com.google.android.material.tabs.TabLayout;
+import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int PHOTO_REQUEST_CODE = 11;
     FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction ft = fm.beginTransaction();
     public FrameLayout fr;
@@ -35,11 +36,13 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences obj;
     private String icon,luogo,descrizione;
     private boolean post;
+    private float dpi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        dpi = getApplicationContext().getResources().getDisplayMetrics().density;
         obj = getApplicationContext().getSharedPreferences("file",MODE_PRIVATE);
         editor = obj.edit();
         icon = obj.getString("IMMAGINE",null);
@@ -82,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //INSERISCI FRAGMMENT MISURA
                 if(tab.getText().equals("MISURA")){
-
+                    misura = new Misura();
+                    ft.add(fr.getId(),misura,null);
                 }
                 ft.commit();
             }
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //RIMUOVI FRAGMMENT MISURA
                 if(tab.getText().equals("MISURA")){
-
+                    ft.remove(misura);
                 }
                 ft.commit();
             }
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             ImageView imageView = (ImageView) findViewById(R.id.img0);
             if (imageView != null)
                 imageView.setImageBitmap(img);
-            imageView.getLayoutParams().height = 215;
+            imageView.getLayoutParams().height = (int) (194*dpi);
             TextView tv_luogo = findViewById(R.id.luogo0);
             tv_luogo.setText(luogo + "");
             TextView desc = findViewById(R.id.descrizione0);
@@ -159,5 +163,30 @@ public class MainActivity extends AppCompatActivity {
     public void info(View view){
         Intent intent = new Intent(MainActivity.this,Info.class);
         startActivity(intent);
+    }
+
+    public void apriFotocamera(View view){
+        Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(photoIntent, PHOTO_REQUEST_CODE);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==PHOTO_REQUEST_CODE)
+        {
+            Intent intent = new Intent(MainActivity.this,AddMisura.class);
+            startActivity(intent);
+            Bitmap bp = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bp.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+            String imgString = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+            editor.putString("SCATTO",imgString);
+            editor.commit();
+        }
     }
 }
