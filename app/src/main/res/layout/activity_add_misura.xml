@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="#000000">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:onClick="back_to_misura"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_round_keyboard_arrow_left_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"/>
+
+    </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:gravity="center_horizontal"
+       android:orientation="vertical"
+       android:paddingBottom="100dp">
+
+       <TextView
+           android:id="@+id/indeceSQM"
+           android:textSize="25dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="#FFFFFF"
+           android:text="SQM:"/>
+
+       <com.google.android.material.card.MaterialCardView
+           android:id="@+id/card"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="8dp">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <!-- Media -->
+               <ImageView
+                   android:id="@+id/imgScatto"
+                   android:layout_width="match_parent"
+                   android:layout_height="250dp"
+                   android:scaleType="centerCrop"
+                   />
+           </LinearLayout>
+       </com.google.android.material.card.MaterialCardView>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="20dp"
+           android:text="Quante stelle riesci a vedere?"
+           android:textColor="#FFFFFF"
+           android:paddingTop="10dp"
+           android:paddingBottom="10dp"/>
+
+       <RadioGroup
+           android:gravity="center_horizontal"
+           android:id="@+id/radioGroup"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:paddingBottom="30dp"
+           android:orientation="horizontal">
+
+               <RadioButton
+                   android:id="@+id/radio_button_1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:paddingRight="20dp"
+                   android:text="@string/checkbox1"/>
+               <RadioButton
+                   android:id="@+id/radio_button_2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:paddingRight="20dp"
+                   android:text=" 10-50"/>
+
+               <RadioButton
+                   android:id="@+id/radio_button_3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:paddingRight="20dp"
+                   android:text="50-100"/>
+               <RadioButton
+                   android:id="@+id/radio_button_4"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text=" >100 "/>
+
+       </RadioGroup>
+       <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+           android:id = "@+id/confermaMisura"
+           android:layout_width = "wrap_content"
+           android:layout_height = "wrap_content"
+           android:text ="  CONFERMA"
+           android:onClick="addMisura"
+           android:enabled="false"
+           android:layout_gravity="center"
+           android:textAlignment="center" />
+   </LinearLayout>
+
+</RelativeLayout>

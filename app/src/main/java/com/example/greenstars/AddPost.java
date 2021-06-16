@@ -1,16 +1,13 @@
 package com.example.greenstars;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,7 +16,6 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -29,14 +25,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -62,7 +53,7 @@ public class AddPost extends Activity {
     private float dpi;
     private SharedPreferences.Editor editor;
     private SharedPreferences obj;
-    private ImageView img_button_back;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +65,6 @@ public class AddPost extends Activity {
         dpi = getApplicationContext().getResources().getDisplayMetrics().density;
         error_img=findViewById(R.id.error_img);
         buttonConferma=findViewById(R.id.buttonPost);
-        img_button_back=findViewById(R.id.button_back_post);
-        img_button_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("DEBUG","tasto indietro");
-                onBackPressed();
-            }
-        });
         buttonConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -302,6 +285,10 @@ public class AddPost extends Activity {
         onBackPressed();
     }
     public void back_to_bacheca(View view){
+        onBackPressed();
+    }
+    public void logoexit(View view){
+        Log.d("DEBUG","LOGO");
         onBackPressed();
     }
 }
