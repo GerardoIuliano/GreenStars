@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="lat">
+        <item>48.7965953656776</item>
+        <item>40.45180480370188</item>
+        <item>48.11498936318354</item>
+        <item>38.07171606881287</item>
+        <item>53.402212795870966</item>
+        <item>45.51082029014112</item>
+        <item>35.76590636472205</item>
+        <item>55.67318986816773</item>
+    </array>
+    <array name="lon">
+        <item>2.3846751705448317</item>
+        <item>-3.723722556675278</item>
+        <item>11.601792343981916</item>
+        <item>23.74100338422546</item>
+        <item>-2.9393904746162396</item>
+        <item>9.162867204421842</item>
+        <item>139.72364044818207</item>
+        <item>37.817751983016564</item>
+    </array>
+    <array name="color">
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+        <item>3</item>
+        <item>1</item>
+    </array>
+</resources>
+

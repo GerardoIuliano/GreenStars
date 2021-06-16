@@ -4,6 +4,8 @@ package com.example.greenstars;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,14 +32,16 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Mappa extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap map;
 
     private PlacesClient placesClient;
-
+    private float color;
     private SharedPreferences.Editor editor;
     private SharedPreferences obj;
 
@@ -91,15 +95,46 @@ public class Mappa extends Fragment implements OnMapReadyCallback{
         String lat,lon;
         lat=obj.getString("LATITUDINE",null);
         lon=obj.getString("LONGITUDINE",null);
+        int sqm=obj.getInt("SQM",1);
         if(lat!=null && lon!=null){
             LatLng nuovaMisurazione=new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
+            if(sqm>=0 && sqm<81)
+                color=BitmapDescriptorFactory.HUE_YELLOW;
+            if(sqm>=81 && sqm<165)
+                color=BitmapDescriptorFactory.HUE_ORANGE;
+            if(sqm>=165 && sqm<256)
+                color=BitmapDescriptorFactory.HUE_RED;
             map.addMarker(new MarkerOptions().position(nuovaMisurazione).title("New Marker").icon(BitmapDescriptorFactory
-                    .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    .defaultMarker(color)));
             map.moveCamera(CameraUpdateFactory.newLatLng(nuovaMisurazione));
         }
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
+        Resources res = getResources();
+        TypedArray latitude = res.obtainTypedArray(R.array.lat);
+        TypedArray longitude = res.obtainTypedArray(R.array.lon);
+        TypedArray colori = res.obtainTypedArray(R.array.color);
+        LatLng luogo;
+        for(int i=0;i<latitude.length();i++){
+            luogo = new LatLng(Double.parseDouble(latitude.getString(i)), Double.parseDouble(longitude.getString(i)));
+            switch (Integer.parseInt(colori.getString(i))){
+                case 1: color=BitmapDescriptorFactory.HUE_YELLOW;break;
+                case 2: color=BitmapDescriptorFactory.HUE_ORANGE;break;
+                case 3: color=BitmapDescriptorFactory.HUE_RED;break;
+            }
+            map.addMarker(new MarkerOptions().position(luogo).icon(BitmapDescriptorFactory
+                    .defaultMarker(color)));
+        }
+
     }
 }
+//48.7965953656776, 2.3846751705448317 Parigi
+//40.45180480370188, -3.723722556675278 Madrid
+//48.11498936318354, 11.601792343981916 Monaco
+//38.07171606881287, 23.74100338422546 Atene
+///53.402212795870966, -2.9393904746162396 Liverpool
+//45.51082029014112, 9.162867204421842 Milano
+//35.76590636472205, 139.72364044818207 Tokio
+//55.67318986816773, 37.817751983016564 Mosca

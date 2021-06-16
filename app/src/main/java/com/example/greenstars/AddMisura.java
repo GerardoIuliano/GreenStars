@@ -39,6 +39,7 @@ public class AddMisura extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 button.setEnabled(true);
+                button.setBackgroundColor(Color.WHITE);
             }
         });
         String icon = obj.getString("SCATTO", null);
