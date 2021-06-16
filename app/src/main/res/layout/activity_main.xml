@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#1C1B1B"
     tools:context=".MainActivity">
 
 
@@ -25,10 +25,9 @@
 
         <ImageView
             android:layout_gravity="center_horizontal"
-            android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:src="@drawable/bitmap"/>
 
 

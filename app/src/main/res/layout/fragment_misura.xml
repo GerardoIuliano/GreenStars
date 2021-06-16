@@ -5,8 +5,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,10 +21,11 @@
                 android:paddingBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#191919"
+                android:background="#000000"
                 android:text="Consiglio"/>
             <TextView
-                android:background="#191919"
+                android:textAlignment="center"
+                android:background="#000000"
                 android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,6 +56,7 @@
                 android:text ="  MISURA"
                 android:layout_gravity="center"
                 android:textAlignment="center"
+                android:backgroundTint="#FFFFFF"
                 android:onClick="apriFotocamera"/>
         </LinearLayout>
 

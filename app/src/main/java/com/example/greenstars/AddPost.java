@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -92,6 +93,8 @@ public class AddPost extends Activity {
                     Log.d("LIST_L_IN",luogo);
                     tv_luogo.setError("Campo non valido");
                     tv_luogo.setErrorEnabled(true);
+                    buttonConferma.setEnabled(false);
+                    buttonConferma.setBackgroundColor(Color.rgb(46,46,46));
                 }else{
                     Log.d("LIST_L_OUT","FUORI");
                     tv_luogo.setError("");
@@ -115,6 +118,8 @@ public class AddPost extends Activity {
                     Log.d("LIST_D_IN",descrizione);
                     tv_descrizione.setError("Campo non valido");
                     tv_descrizione.setErrorEnabled(true);
+                    buttonConferma.setEnabled(false);
+                    buttonConferma.setBackgroundColor(Color.rgb(46,46,46));
                 }else{
                     Log.d("LIST_D_OUT","FUORI");
                     tv_descrizione.setError("");
@@ -265,8 +270,9 @@ public class AddPost extends Activity {
         }
     }
     public void compilato(){
-        if( !(descrizione == null || descrizione.equals("")) && !(luogo == null || luogo.equals("")) && immagine!=null){
+        if( !(descrizione == null || descrizione.trim().equals("")) && !(luogo == null || luogo.trim().equals("")) && immagine!=null){
             buttonConferma.setEnabled(true);
+            buttonConferma.setBackgroundColor(Color.WHITE);
         }else{
             buttonConferma.setEnabled(false);
         }
@@ -287,8 +293,5 @@ public class AddPost extends Activity {
     public void back_to_bacheca(View view){
         onBackPressed();
     }
-    public void logoexit(View view){
-        Log.d("DEBUG","LOGO");
-        onBackPressed();
-    }
+
 }
