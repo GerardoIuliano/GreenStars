@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==PHOTO_REQUEST_CODE)
+        if (requestCode==PHOTO_REQUEST_CODE && data != null)
         {
             Intent intent = new Intent(MainActivity.this,AddMisura.class);
             startActivity(intent);
